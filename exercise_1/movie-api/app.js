@@ -20,6 +20,8 @@ let movies = [
     }
 ];
 
+let nextId = 4;
+
 const express = require("express");
 
 const app = express();
@@ -50,7 +52,7 @@ app.post("/movies", (req,res) =>{
         });
     }
     const newMovie ={
-        id: movies.length + 1,
+        id: nextId++,
         title: req.body.title,
         director: req.body.director,
         year: req.body.year
@@ -60,3 +62,28 @@ app.post("/movies", (req,res) =>{
 
     res.status(201).json(newMovie);
 })
+
+app.patch("/movies/:id", (req, res) =>{
+    const movie = movies.find((movie) => movie.id == req.params.id);
+
+    if(!movie){
+        return res.status(404).json({error: "Movie not found"});
+    }
+
+    if (req.body.title != undefined) movie.title = req.body.title;
+    if (req.body.director != undefined) movie.director = req.body.director;
+    if(req.body.year != undefined) movie.year = req.body.year;
+
+    res.json(movie);
+})
+
+app.delete("/movies/:id", (req, res) =>{
+    const index = movies.findIndex((movie) => movie.id == req.params.id);
+
+    if(index == -1){
+        return res.status(404).json({error: "Movie not found"});
+    }
+
+    movies.splice (index, 1);
+    res.status(204).end();
+});
