@@ -1,0 +1,24 @@
+# This is for testing crus APIs from server
+# Requires REst Client Extension of VS Code
+
+###Get all movies
+
+GET http://localhost:3000/movies
+
+### Get a movie by id
+GET http://localhost:3000/movies/24
+
+
+### Add a movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "The Matrix",
+    "director": "Christopher Nolan",
+    "year": 2027
+}
+###
+DELETE http://localhost:3000/movies/25
+###
+GET http://localhost:3000/

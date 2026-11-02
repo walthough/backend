@@ -1,0 +1,8 @@
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "Blade Runner",
+    "director": "Ridley Scott",
+    "year":1982
+}
