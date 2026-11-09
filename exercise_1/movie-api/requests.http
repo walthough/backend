@@ -12,9 +12,11 @@ POST http://localhost:3000/movies
 Content-Type: application/json
 
 {
-    "title": "Blade Runner",
+    "id": 1,
+    "title": "Inception",
     "director": "Ridley Scott",
-    "year":1982
+    "year":2010,
+    "genre": "Sci-Fi"
 }
 
 ### Invalid movie
@@ -25,6 +27,25 @@ Content-Type: application/json
   "director": "Nobody"
 }
 
+### Create a valid movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Arrival",
+  "year": 2016,
+  "genre": "Sci-Fi"
+}
+
+### Create an invalid movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "",
+  "year": "not a number"
+}
+
 ### update movie
 PATCH http://localhost:3000/movies/1
 Content-Type: application/json
@@ -33,5 +54,107 @@ Content-Type: application/json
     "title": "New title"
 }
 
+### Partially update movie 1
+PATCH http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "year": 2000
+}
+
 ### delete movie 
 DELETE http://localhost:3000/movies/1
+
+
+### Valid movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Arrival",
+  "year": 2016,
+  "genre": "Sci-Fi"
+}
+
+### Invalid movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "",
+  "year": "not a number"
+}
+
+
+### PUT with a missing genre
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "year": 2010
+}
+
+### Replace movie 1
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "title": "The Matrix",
+  "year": 1999,
+  "genre": "Sci-Fi"
+}
+
+### Reject an incomplete replacement
+PUT http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "title": "The Matrix"
+}
+
+### PATCH with an invalid year
+PATCH http://localhost:3000/movies/1
+Content-Type: application/json
+
+{
+  "year": "not a number"
+}
+
+### Get a missing movie
+GET http://localhost:3000/movies/999
+
+### Get Sci-Fi Genre
+GET http://localhost:3000/movies?genre=sci-fi
+
+### Filter by genre and year
+GET http://localhost:3000/movies?genre=Sci-Fi&minYear=2000
+
+### Invalid year filter
+GET http://localhost:3000/movies?minYear=invalid
+
+
+### Sort by year
+GET http://localhost:3000/movies?sort=year
+
+### Sort by title
+GET http://localhost:3000/movies?sort=title
+
+### Invalid sort
+GET http://localhost:3000/movies?sort=rating
+
+### Check the original order
+GET http://localhost:3000/movies
+
+### Local host not exist
+GET http://localhost:3000/does-not-exist
+
+
+### Filter by genre and year
+GET http://localhost:3000/movies?genre=Sci-Fi&minYear=2000
+
+### Invalid minimum year
+GET http://localhost:3000/movies?minYear=invalid
+
+### Unknown route
+GET http://localhost:3000/does-not-exist
