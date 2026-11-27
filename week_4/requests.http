@@ -1,0 +1,42 @@
+﻿POST http://localhost:3001/movies
+Content-Type: application/json
+
+{
+    "title": "Cars",
+    "director": "Michael Bay",
+    "year": 2003
+}
+
+
+####
+
+PUT http://localhost:3001/movies/6
+Content-Type: application/json
+
+{
+    "title": "Cars (test)",
+    "year": 2003
+}
+
+
+####
+PATCH http://localhost:3001/movies/5
+Content-Type: application/json
+
+{
+    "title": "Cars 2"
+}
+
+###
+
+PATCH http://localhost:3001/movies/6
+Content-Type: application/json
+
+{}
+
+### Delete
+DELETE http://localhost:3001/movies/6
+
+#### GET
+
+GET http://localhost:3001/movies
